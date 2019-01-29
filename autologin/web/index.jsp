@@ -6,46 +6,19 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>首页</title>
   </head>
   <body>
-  <form >
-
-    <table>
-      <tbody>
-      <tr>
-        <td >
-          name:
-        </td>
-        <td>
-          <input type="text" name="username"  id="username" onblur="checkNameExist()" onchange="checkNameExist()"/>
-        </td>
+  <c:if test="${empty userBean}">
+    <a href="login.jsp">请登入</a>
+  </c:if>
 
 
-      </tr>
-      <tr>
-        <td>
-          password:
-        </td>
-        <td>
-          <input type="password" name="password" />
-        </td>
-      </tr>
-      <tr>
-        <td>
-
-
-          <input type="checkbox"  name="atuo_login" checked="true"/>自动登入
-        </td>
-        <td>
-          <input type="submit" value="提交" />
-        </td>
-      </tr>
-      </tbody>
-    </table>
-
-  </form>
+  <c:if test="${not empty userBean}">
+    <h2>欢迎你 ${userBean.username}</h2>
+  </c:if>
   </body>
 </html>
