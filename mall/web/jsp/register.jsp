@@ -67,6 +67,24 @@
 
       })
     })
+
+    function  checkFormData() {
+
+        var strUserName = $("#username").val().trim()
+        console.log(strUserName)
+        if (strUserName == ""){
+            return false
+        }
+
+        var strPwd = $("#password").val().trim()
+        var strConfirmpwd = $("#confirmpwd").val().trim()
+
+        if (strConfirmpwd != strPwd){
+            alert("密码不一致")
+            return false
+        }
+        return true
+    }
 </script>
 </head>
 <body>
@@ -140,7 +158,7 @@
 
         <div class="col-md-8" style="background:#fff;padding:40px 80px;margin:30px;border:7px solid #ccc;">
             <font>会员注册</font>USER REGISTER
-            <form class="form-horizontal" style="margin-top:5px;" action="/userServlet" method="post">
+            <form class="form-horizontal" style="margin-top:5px;" action="/userServlet" method="post" onsubmit="return checkFormData()">
 
                 <input type="hidden" name="method" value="register">
                 <div class="form-group">
@@ -165,9 +183,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                    <label for="email" class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-6">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email" name="email">
+                        <input type="email" class="form-control" id="email" placeholder="Email" name="email">
                     </div>
                 </div>
                 <div class="form-group">

@@ -13,7 +13,14 @@ public class UserServiceImpl implements IUserService {
     @Override
     public boolean register(User user) throws SQLException{
 
-
+    //3_调用业务层注册功能
+        userDao.register(user);
+        try {
+            //向用户邮箱发送一份激活邮件
+//            MailUtils.sendMail(user01.getEmail(),user01.getCode());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
