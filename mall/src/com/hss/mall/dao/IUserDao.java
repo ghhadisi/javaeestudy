@@ -9,4 +9,12 @@ public interface IUserDao {
 
 
     public void register(User user)throws SQLException;
+
+    public User userActive(String code)throws SQLException;
+
+    public void updateUser(User user) throws SQLException;
+
+    public User login(User user) throws SQLException;
+
+
 }

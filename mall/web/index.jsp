@@ -14,4 +14,6 @@
   $END$
   </body>
 </html>
-<jsp:forward page="/jsp/index.jsp"></jsp:forward>
+<%--
+<jsp:forward page="/jsp/index.jsp"></jsp:forward>--%>
+<jsp:forward page="/indexServlet"></jsp:forward>

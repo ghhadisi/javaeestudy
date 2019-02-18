@@ -9,4 +9,12 @@ public interface IUserService {
 
 
     public boolean checkUserNameCanUse(String username) throws SQLException;
+
+
+    public User userActive(String code) throws SQLException;
+
+    void updateUser(User user)throws SQLException;
+
+    public User login(User user) throws SQLException;
+
 }

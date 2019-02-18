@@ -3,6 +3,7 @@ package com.hss.mall.service;
 import com.hss.mall.dao.IUserDao;
 import com.hss.mall.dao.UserDaoImpl;
 import com.hss.mall.domain.User;
+import com.hss.mall.utils.MailUtils;
 
 import java.sql.SQLException;
 
@@ -17,7 +18,7 @@ public class UserServiceImpl implements IUserService {
         userDao.register(user);
         try {
             //向用户邮箱发送一份激活邮件
-//            MailUtils.sendMail(user01.getEmail(),user01.getCode());
+            MailUtils.sendMail(user.getEmail(),user.getCode());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -30,4 +31,23 @@ public class UserServiceImpl implements IUserService {
         boolean flag =  userDao.checkUserNameIsExist(username);
         return !flag;
     }
+
+    @Override
+    public User userActive(String code) throws SQLException {
+
+
+        return userDao.userActive(code);
+    }
+
+    @Override
+    public void updateUser(User user) throws SQLException {
+        userDao.updateUser(user);
+    }
+
+    @Override
+    public User login(User user) throws SQLException {
+        return userDao.login(user);
+    }
+
+
 }

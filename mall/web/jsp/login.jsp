@@ -114,24 +114,26 @@ font {
 				<font>会员登录</font>USER LOGIN
 
 				<div>&nbsp;</div>
-<form class="form-horizontal">
-  
+<form class="form-horizontal" action="/userServlet" method="post">
+
+
+	<input name="method" value="login" type="hidden">
  <div class="form-group">
     <label for="username" class="col-sm-2 control-label">用户名</label>
     <div class="col-sm-6">
-      <input type="text" class="form-control" id="username" placeholder="请输入用户名">
+      <input type="text" class="form-control" id="username" placeholder="请输入用户名" name="username">
     </div>
   </div>
    <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+    <label for="password" class="col-sm-2 control-label">密码</label>
     <div class="col-sm-6">
-      <input type="password" class="form-control" id="inputPassword3" placeholder="请输入密码">
+      <input type="password" class="form-control" id="password" placeholder="请输入密码" name="password">
     </div>
   </div>
    <div class="form-group">
-        <label for="inputPassword3" class="col-sm-2 control-label">验证码</label>
+        <label for="validcode" class="col-sm-2 control-label">验证码</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="inputPassword3" placeholder="请输入验证码">
+      <input type="text" class="form-control" id="validcode" placeholder="请输入验证码">
     </div>
     <div class="col-sm-3">
       <img src="${pageContext.request.contextPath}/img/captcha.jhtml"/>
@@ -142,10 +144,10 @@ font {
     <div class="col-sm-offset-2 col-sm-10">
       <div class="checkbox">
         <label>
-          <input type="checkbox"> 自动登录
+          <input type="checkbox" name="autoLogin"> 自动登录
         </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          <input type="checkbox"> 记住用户名
+          <input type="checkbox" name="remUser"> 记住用户名
         </label>
       </div>
     </div>
