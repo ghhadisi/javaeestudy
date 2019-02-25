@@ -1,5 +1,6 @@
 package com.hss.mall.service;
 
+import com.hss.mall.domain.PageModel;
 import com.hss.mall.domain.Product;
 
 import java.sql.SQLException;
@@ -13,7 +14,11 @@ public interface IProductService {
 
     Product findProductByPid(String pid)throws SQLException ;
 //
-//    PageModel findProductsWithCidAndPage(String cid, int curNum)throws SQLException ;
+
+
+    PageModel findProductsByCidWithPage(String cid, int num) throws Exception;
+
+
 //
 //    void saveProduct(Product product)throws SQLException ;
 

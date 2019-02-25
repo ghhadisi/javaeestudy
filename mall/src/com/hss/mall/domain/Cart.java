@@ -66,7 +66,10 @@ public class Cart {
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	
-	
+
+	//移除购物项
+	public void removeCartItem(String pid){
+		map.remove(pid);
+	}
 	
 }

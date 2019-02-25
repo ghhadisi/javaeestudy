@@ -5,6 +5,7 @@ import com.hss.mall.utils.JDBCUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -31,5 +32,20 @@ public class ProductDaoImpl implements IProductDao {
 
         return runner.query("select * from product where pid=?", new BeanHandler<Product>(Product.class),pid);
 
+    }
+
+    @Override
+    public List findProductsByCidWithPage(String cid, int startIndex, int pageSize) throws Exception {
+        QueryRunner runner = new QueryRunner(JDBCUtils.getDataSource());
+
+        return runner.query("select * from product where cid=? limit ?,?",new BeanListHandler<Product>(Product.class), cid, startIndex, pageSize);
+    }
+
+    @Override
+    public int findTotalRecords(String cid) throws Exception {
+
+        QueryRunner runner = new QueryRunner(JDBCUtils.getDataSource());
+        Long num = (Long) runner.query("select count(*) from product where cid=?",new ScalarHandler(),cid);
+        return num.intValue();
     }
 }

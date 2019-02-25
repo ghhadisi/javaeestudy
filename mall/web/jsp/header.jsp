@@ -26,9 +26,30 @@
             $.post("${pageContext.request.contextPath}/categoryServlet",{
                 "method":"findAllCats"
             },function (data, status) {
-                console.log(data)
+                // console.log(data)
+                var tmp = ${ cid} +""
+                // console.log(tmp == undefined)
+
+                console.log(tmp)
                 $.each(data,function (i,obj) {
-                    var li="<li><a href='${pageContext.request.contextPath}/ProductServlet?method=findProductsWithCidAndPage&num=1&cid="+obj.cid+"'>"+obj.cname+"</a></li>";
+                    <%--<c:if test="${ cid == obj.cid}">class="active"</c:if>--%>
+                    var li =""
+
+                    if (tmp != undefined && tmp == obj.cid) {
+                        li="<li class='active' ><a href='${pageContext.request.contextPath}/productServlet?method=findProductsWithCidAndPage&num=1&cid="+obj.cid+"'>"+obj.cname+"</a></li>";
+
+                    }else {
+                        li="<li ><a href='${pageContext.request.contextPath}/productServlet?method=findProductsWithCidAndPage&num=1&cid="+obj.cid+"'>"+obj.cname+"</a></li>";
+                    }
+                    // if (tmp != undefined){
+                    //     console.log("tmp = "+typeof (tmp)+ " obj.cid="+typeof (obj.cid))
+                    //
+                    // }
+                    // console.log(tmp == obj.cid)
+
+
+                    <%--li="<li <c:if test='${tmp == obj.cid }'>class='active'</c:if>><a href='${pageContext.request.contextPath}/productServlet?method=findProductsWithCidAndPage&num=1&cid="+obj.cid+"'>"+obj.cname+"</a></li>";--%>
+
                     $("#myUL").append(li)
                 })
             })

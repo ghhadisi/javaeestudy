@@ -1,5 +1,6 @@
 package com.hss.mall.servlet;
 
+import com.hss.mall.domain.PageModel;
 import com.hss.mall.domain.Product;
 import com.hss.mall.service.IProductService;
 import com.hss.mall.service.ProductServiceImpl;
@@ -28,5 +29,18 @@ public class ProductServlet extends BaseServlet {
         return "/jsp/product_info.jsp";
     }
 
+
+    public String  findProductsWithCidAndPage(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        String strNum = req.getParameter("num");
+        int num = Integer.parseInt(strNum);
+        String cid = req.getParameter("cid");
+        req.setAttribute("cid",cid);
+
+        IProductService productService = new ProductServiceImpl();
+        PageModel pm=productService.findProductsByCidWithPage(cid,num);
+        req.setAttribute("page",pm);
+
+        return "/jsp/product_list.jsp";
+    }
 
 }

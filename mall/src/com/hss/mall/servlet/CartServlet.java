@@ -64,6 +64,25 @@ public class CartServlet extends BaseServlet {
 
 
     public String delCartItem(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-        return  null;
+//获取待删除商品pid
+        String pid=req.getParameter("pid");
+        //获取到购物车
+        Cart cart=(Cart)req.getSession().getAttribute("cart");
+        //调用购物车删除购物项方法
+        cart.removeCartItem(pid);
+        //重定向到/jsp/cart.jsp
+        resp.sendRedirect("/jsp/cart.jsp");
+        return null;
     }
+
+    public String clearCart(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        //获取购物车
+        Cart cart=(Cart)req.getSession().getAttribute("cart");
+        //调用购物车上的清空购物车方法
+        cart.clearCart();
+        //重新定向到/jsp/cart.jsp
+        resp.sendRedirect("/jsp/cart.jsp");
+        return null;
+    }
+
 }

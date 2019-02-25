@@ -1,5 +1,6 @@
 package com.hss.mall.dao;
 
+import com.hss.mall.domain.PageModel;
 import com.hss.mall.domain.Product;
 
 import java.sql.SQLException;
@@ -12,5 +13,8 @@ public interface IProductDao {
 
     public Product findProductByPid(String pid) throws SQLException ;
 
+    List findProductsByCidWithPage(String cid, int startIndex, int pageSize)throws Exception;
+
+    int findTotalRecords(String cid)throws Exception;
 
 }

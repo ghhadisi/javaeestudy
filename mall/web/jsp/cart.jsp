@@ -39,14 +39,14 @@
 		<script type="text/javascript">
             function delCart(id){
                 if(confirm("忍心删除我吗?")){
-                    location.href="${pageContext.request.contextPath}/CartServlet?method=delCartItem&pid="+id;
+                    location.href="${pageContext.request.contextPath}/cartServlet?method=delCartItem&pid="+id;
                 }
             }
 
             $(function(){
                 $("#clear").click(function(){
                     if(confirm("忍心删除我吗?")){
-                        location.href="${pageContext.request.contextPath}/CartServlet?method=clearCart";
+                        location.href="${pageContext.request.contextPath}/cartServlet?method=clearCart";
                     }
                 });
 
@@ -54,7 +54,7 @@
                 $(".delete").click(function(){
                     var pid=this.title;
                     if(confirm("忍心删除我吗?")){
-                        location.href="${pageContext.request.contextPath}/CartServlet?method=delCartItem&pid="+pid;
+                        location.href="${pageContext.request.contextPath}/cartServlet?method=delCartItem&pid="+pid;
                     }
                 });
 
@@ -126,44 +126,31 @@
 
 			</div>
 
-			<div style="margin-right:130px;">
-				<div style="text-align:right;">
-					<em style="color:#ff6600;">
-				登录后确认是否享有优惠&nbsp;&nbsp;
-			</em> 赠送积分: <em style="color:#ff6600;">596</em>&nbsp; 商品金额: <strong style="color:#ff6600;">￥596.00元</strong>
+
+			<c:if test="${not empty cart.cartItems}">
+
+				<div style="margin-right:130px;">
+					<div style="text-align:right;">
+						<em style="color:#ff6600;">
+							登录后确认是否享有优惠&nbsp;&nbsp;
+						</em> 赠送积分: <em style="color:#ff6600;">${cart.total}</em>&nbsp; 商品金额: <strong style="color:#ff6600;">￥${cart.total}元</strong>
+					</div>
+					<div style="text-align:right;margin-top:10px;margin-bottom:10px;">
+						<a href="${pageContext.request.contextPath}/cartServlet?method=clearCart" id="clear" class="clear">清空购物车</a>
+						<a href="${pageContext.request.contextPath}/orderServlet?method=saveOrder">
+								<%--提交表单 --%>
+							<input type="submit" width="100" value="提交订单" name="submit" border="0" style="background: url('${pageContext.request.contextPath}/img/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+									height:35px;width:100px;color:white;">
+						</a>
+					</div>
 				</div>
-				<div style="text-align:right;margin-top:10px;margin-bottom:10px;">
-					<a href="${pageContext.request.contextPath}/jsp/order_info.jsp" id="clear" class="clear">清空购物车</a>
-					<a href="${pageContext.request.contextPath}/jsp/order_info.jsp">
-						<%--提交表单 --%>
-						<input type="submit" width="100" value="提交订单" name="submit" border="0" style="background: url('${pageContext.request.contextPath}/img/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-						height:35px;width:100px;color:white;">
-					</a>
-				</div>
-			</div>
+			</c:if>
+
 
 		</div>
 
-		<div style="margin-top:50px;">
-			<img src="${pageContext.request.contextPath}/img/footer.jpg" width="100%" height="78" alt="我们的优势" title="我们的优势" />
-		</div>
+			<%@include file="footer.jsp"%>
 
-		<div style="text-align: center;margin-top: 5px;">
-			<ul class="list-inline">
-				<li><a href="${pageContext.request.contextPath}/jsp/info.jsp">关于我们</a></li>
-				<li><a>联系我们</a></li>
-				<li><a>招贤纳士</a></li>
-				<li><a>法律声明</a></li>
-				<li><a>友情链接</a></li>
-				<li><a target="_blank">支付方式</a></li>
-				<li><a target="_blank">配送方式</a></li>
-				<li><a>服务声明</a></li>
-				<li><a>广告声明</a></li>
-			</ul>
-		</div>
-		<div style="text-align: center;margin-top: 5px;margin-bottom:20px;">
-			Copyright &copy; 2005-2016 传智商城 版权所有
-		</div>
 
 	</body>
 
