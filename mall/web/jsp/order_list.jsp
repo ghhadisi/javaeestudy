@@ -47,14 +47,24 @@
                 </div>
             </c:if>
             <c:if test="${not empty page}">
-                <strong>我的订单</strong>
 
                 <table class="table table-bordered">
 
-                    <c:forEach items="${page.list}" var="item">
+                    <c:forEach items="${page.records}" var="item">
                         <tbody>
                         <tr class="success">
-                            <th colspan="5">订单编号:${item.oid}</th>
+                            <th colspan="5">
+                                <a href="${pageContext.request.contextPath}/orderServlet?method=findOrderByOid&oid=${item.oid}">订单编号:${item.oid}</a>
+                                总金额:¥${item.total}元
+                                <c:if test="${item.state==1}">
+                                    <a href="${pageContext.request.contextPath}/orderServlet?method=findOrderByOid&oid=${item.oid}">付款</a>
+                                </c:if>
+                                <c:if test="${item.state==2}">未发货</c:if>
+                                <c:if test="${item.state==3}">
+                                    <a href="#">签收</a>
+                                </c:if>
+                                <c:if test="${item.state==4}">结束</c:if>
+                            </th>
                         </tr>
                         <tr class="warning">
                             <th>图片</th>
@@ -64,7 +74,7 @@
                             <th>小计</th>
                         </tr>
 
-                        <c:forEach items="item.list" var="p">
+                        <c:forEach items="${item.list}" var="p">
                             <tr class="active">
                                 <td width="60" width="40%">
                                     <input type="hidden" name="id" value="22">

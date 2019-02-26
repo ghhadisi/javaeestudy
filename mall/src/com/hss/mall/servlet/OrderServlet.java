@@ -192,4 +192,18 @@ public class OrderServlet extends BaseServlet {
         }
         return null;
     }
+
+
+    //findOrderByOid
+    public String findOrderByOid(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        //获取到订单oid
+        String oid=req.getParameter("oid");
+        //调用业务层功能:根据订单编号查询订单信息
+        IOrderService OrderService=new OrderServiceImpl();
+        Order order=OrderService.findOrderByOid(oid);
+        // 将订单放入request
+        req.setAttribute("order", order);
+        // 转发到/jsp/order_info.jsp
+        return "/jsp/order_info.jsp";
+    }
 }

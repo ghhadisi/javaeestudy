@@ -53,7 +53,7 @@ public class OrderDaoImpl implements IOrderDao {
         for (Order order: list){
             //获取到每笔订单oid   查询每笔订单下的订单项以及订单项对应的商品信息
             String oid=order.getOid();
-            sql = "select * from orderItem as o, product as p where o.pid =  p.id and oid = ?";
+            sql = "select * from orderitem as o, product as p where o.pid =  p.pid and oid = ?";
             List<Map<String, Object>> list02 = qr.query(sql, new MapListHandler(),oid);
             //遍历list
             for (Map<String, Object> map : list02) {
