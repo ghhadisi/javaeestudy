@@ -18,7 +18,6 @@ body {
 </style>
 </head>
 <body style="background: #278296">
-<center><font style="color:#f00">错误信息</font></center>
 <form method="post" action="${pageContext.request.contextPath }/admin/home.jsp" target="_parent" name='theForm' onsubmit="return validate()">
   <table cellspacing="0" cellpadding="0" style="margin-top: 100px" align="center">
   <tr>
