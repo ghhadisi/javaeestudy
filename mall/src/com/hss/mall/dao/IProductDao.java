@@ -17,4 +17,11 @@ public interface IProductDao {
 
     int findTotalRecords(String cid)throws Exception;
 
+    List<Product> findAllProductsWithPage(int startIndex, int pageSize)throws Exception;
+
+    int findTotalRecords()throws Exception;
+
+
+    void saveProduct(Product product)throws SQLException;
+
 }

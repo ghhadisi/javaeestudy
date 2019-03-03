@@ -8,7 +8,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/public.js"></script>
     <script type="text/javascript">
         function addCategory() {
-            window.location.href = "${pageContext.request.contextPath}/admin/category/add.jsp";
+            window.location.href = "${pageContext.request.contextPath}/adminCategoryServlet?method=addCategoryUI";
         }
     </script>
 </HEAD>
@@ -74,7 +74,7 @@
                                     ${item.cname}
                             </td>
                             <td align="center" style="HEIGHT: 22px">
-                                <a href="edit.jsp">
+                                <a href="${pageContext.request.contextPath}/adminCategoryServlet?method=editCategoryUI&cid=${item.cid}">
                                     <img src="${pageContext.request.contextPath}/img/admin/i_edit.gif" border="0"
                                          style="CURSOR: hand">
                                 </a>

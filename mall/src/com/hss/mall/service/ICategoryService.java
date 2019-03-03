@@ -11,4 +11,9 @@ public interface ICategoryService {
 
 	void saveCat(Category c)throws SQLException;
 
+
+	void addCategory(Category c)throws SQLException;
+
+	Category findCategory(String cid)throws SQLException;
+
 }

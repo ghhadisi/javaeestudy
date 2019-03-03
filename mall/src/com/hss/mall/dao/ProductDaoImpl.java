@@ -1,5 +1,6 @@
 package com.hss.mall.dao;
 
+import com.hss.mall.domain.PageModel;
 import com.hss.mall.domain.Product;
 import com.hss.mall.utils.JDBCUtils;
 import org.apache.commons.dbutils.QueryRunner;
@@ -48,4 +49,28 @@ public class ProductDaoImpl implements IProductDao {
         Long num = (Long) runner.query("select count(*) from product where cid=?",new ScalarHandler(),cid);
         return num.intValue();
     }
+
+    @Override
+    public List<Product> findAllProductsWithPage(int startIndex, int pageSize)throws Exception{
+        String sql="select * from product limit  ? , ?";
+        QueryRunner qr=new QueryRunner(JDBCUtils.getDataSource());
+        return qr.query(sql, new BeanListHandler<Product>(Product.class),startIndex,pageSize);
+    }
+
+    @Override
+    public int findTotalRecords() throws Exception {
+        QueryRunner runner = new QueryRunner(JDBCUtils.getDataSource());
+        Long num = (Long) runner.query("select count(*) from product ",new ScalarHandler());
+        return num.intValue();
+    }
+
+    @Override
+    public void saveProduct(Product product) throws SQLException {
+        QueryRunner runner = new QueryRunner(JDBCUtils.getDataSource());
+        String sql="INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?,?)";
+        Object[] params={product.getPid(),product.getPname(),product.getMarket_price(),product.getShop_price(),product.getPimage(),product.getPdate(),product.getIs_hot(),product.getPdesc(),product.getPflag(),product.getCid()};
+        runner.update(sql,params);
+    }
+
+
 }

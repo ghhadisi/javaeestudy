@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <HTML>
 	<HEAD>
@@ -7,7 +8,7 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/public.js"></script>
 		<script type="text/javascript">
 			function addProduct(){
-				window.location.href = "${pageContext.request.contextPath}/admin/product/add.jsp";
+				window.location.href = "${pageContext.request.contextPath}/adminProductServlet?method=addProductUI ";
 			}
 		</script>
 	</HEAD>
@@ -59,67 +60,82 @@
 										下架
 									</td>
 								</tr>
-										<tr onmouseover="this.style.backgroundColor = 'white'"
-											onmouseout="this.style.backgroundColor = '#F5FAFE';">
-											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-												width="18%">
+
+
+								<c:if test="${not empty page}">
+
+									<c:forEach items="${page.records}" var="p" varStatus="status">
+									<tr onmouseover="this.style.backgroundColor = 'white'"
+										onmouseout="this.style.backgroundColor = '#F5FAFE';">
+										<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+											width="18%">
 												${ status.count }
-											</td>
-											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-												width="17%">
-												<img width="40" height="45" src="${ pageContext.request.contextPath }/products/1/c_0037.jpg">
-											</td>
-											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-												width="17%">
+										</td>
+										<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+											width="17%">
+											<img width="40" height="45" src="${ pageContext.request.contextPath }/${p.pimage}">
+										</td>
+										<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+											width="17%">
 												${ p.pname }
-											</td>
-											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-												width="17%">
+										</td>
+										<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+											width="17%">
 												${ p.shop_price }
-											</td>
-											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-												width="17%">
-													是(1)/否(0)
-											</td>
-											<td align="center" style="HEIGHT: 22px">
-												<a href="">
-													<img src="${pageContext.request.contextPath}//img/admin/i_edit.gif" border="0" style="CURSOR: hand">
-												</a>
-											</td>
-									
-											<td align="center" style="HEIGHT: 22px">
+										</td>
+										<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+											width="17%">
+
+											<c:if test="${p.is_hot == 1}">
+												是
+											</c:if>
+											<c:if test="${p.is_hot != 1}">
+												否
+											</c:if>
+										</td>
+										<td align="center" style="HEIGHT: 22px">
+											<a href="">
+												<img src="${pageContext.request.contextPath}/img/admin/i_edit.gif" border="0" style="CURSOR: hand">
+											</a>
+										</td>
+
+										<td align="center" style="HEIGHT: 22px">
 												<%--下架 pushdown --%>
-												<a href="${pageContext.request.contextPath}/">
-													<img src="${pageContext.request.contextPath}/ /i_del.gif" width="16" height="16" border="0" style="CURSOR: hand">
-												</a>
-											</td>
-										</tr>
+											<a href="${pageContext.request.contextPath}/">
+												<img src="${pageContext.request.contextPath}/img/admin/i_del.gif" width="16" height="16" border="0" style="CURSOR: hand">
+											</a>
+										</td>
+									</tr>
+
+									</c:forEach>
+								</c:if>
+
 							</table>
 						</td>
 					</tr>
 					<tr align="center">
 						<td colspan="7">
-							第${ pageBean.currPage }/${ pageBean.totalPage }页 &nbsp; &nbsp; &nbsp;
-							总记录数:${ pageBean.totalCount }  &nbsp; 每页显示:${ pageBean.pageSize }
-							<c:if test="${ pageBean.currPage != 1 }">
-								<a href="${ pageContext.request.contextPath }/AdminProductServlet?method=findByPage&currPage=1">首页</a>|
-								<a href="${ pageContext.request.contextPath }/AdminProductServlet?method=findByPage&currPage=${ pageBean.currPage - 1}">上一页</a>|
+							第${page.currentPageNum }/${ page.totalPageNum }页 &nbsp; &nbsp; &nbsp;
+							总记录数:${ page.totalPageNum }  &nbsp; 每页显示:${ page.pageSize }
+							<c:if test="${ page.currentPageNum != 1 }">
+								<a href="${ pageContext.request.contextPath }/adminProductServlet?method=findAllProductsWithPage&num=1">首页</a>|
+								<a href="${ pageContext.request.contextPath }/adminProductServlet?method=findAllProductsWithPage&num=${ page.currentPageNum - 1}">上一页</a>|
 							</c:if>
 							&nbsp; &nbsp;
 							
-							<c:forEach var="i" begin="1" end="${ pageBean.totalPage }">
-								<c:if test="${ pageBean.currPage == i }">
+							<c:forEach var="i" begin="1" end="${ page.totalPageNum }">
+								<c:if test="${ page.currentPageNum == i }">
 									[${ i }]
 								</c:if>
-								<c:if test="${ pageBean.currPage != i }">
-									<a href="${ pageContext.request.contextPath }/AdminProductServlet?method=findByPage&currPage=${ i}">[${ i }]</a>
+								<c:if test="${ page.currentPageNum != i }">
+									<a href="${ pageContext.request.contextPath }/adminProductServlet?method=findAllProductsWithPage&num=${ i}">[${ i }]</a>
 								</c:if>
 							</c:forEach>
 							
 							&nbsp; &nbsp;
-							<c:if test="${ pageBean.currPage != pageBean.totalPage }">
-								<a href="${ pageContext.request.contextPath }/AdminProductServlet?method=findByPage&currPage=${ pageBean.currPage + 1}">下一页</a>|
-								<a href="${ pageContext.request.contextPath }/AdminProductServlet?method=findByPage&currPage=${ pageBean.totalPage}">尾页</a>|
+							<c:if test="${ page.currentPageNum != page.totalPageNum }">
+								<a href="${ pageContext.request.contextPath }/adminProductServlet?method=findAllProductsWithPage&num=${ page.currentPageNum + 1}">下一页</a>|
+								<a href="${ pageContext.request.contextPath }/adminProductServlet?method=findAllProductsWithPage&num=${ page.totalPageNum}">尾页</a>|
 							</c:if>	
 						</td>
 					</tr>

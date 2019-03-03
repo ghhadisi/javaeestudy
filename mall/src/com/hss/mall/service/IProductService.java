@@ -19,7 +19,9 @@ public interface IProductService {
     PageModel findProductsByCidWithPage(String cid, int num) throws Exception;
 
 
+    PageModel findProductsWithPage( int num) throws Exception;
+
 //
-//    void saveProduct(Product product)throws SQLException ;
+    void saveProduct(Product product)throws SQLException ;
 
 }

@@ -38,4 +38,20 @@ public class ProductServiceImpl implements IProductService {
         page.setUrl("productServlet?method=findProductsWithCidAndPage&cid="+cid);
         return page;
     }
+
+    @Override
+    public PageModel findProductsWithPage(int num) throws Exception {
+
+        int total = productDao.findTotalRecords();
+        PageModel page = new PageModel(num,5,total);
+        List<Product> list=   productDao.findAllProductsWithPage(page.getStartIndex(), page.getPageSize());
+        page.setRecords(list);
+        page.setUrl("productServlet?method=findProductsWithPage");
+        return page;
+    }
+
+    @Override
+    public void saveProduct(Product product) throws SQLException {
+        productDao.saveProduct(product);
+    }
 }

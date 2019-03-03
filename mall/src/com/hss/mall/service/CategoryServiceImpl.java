@@ -19,4 +19,14 @@ public class CategoryServiceImpl implements ICategoryService{
     public void saveCat(Category c) throws SQLException {
         categoryDao.saveCat(c);
     }
+
+    @Override
+    public void addCategory(Category c) throws SQLException {
+        categoryDao.addCategory(c);
+    }
+
+    @Override
+    public Category findCategory(String cid) throws SQLException {
+        return categoryDao.findCategory(cid);
+    }
 }

@@ -104,4 +104,15 @@
         <servlet-name>AdminCategoryServlet</servlet-name>
         <url-pattern>/adminCategoryServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminProductServlet</servlet-name>
+        <servlet-class>com.hss.mall.servlet.AdminProductServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminProductServlet</servlet-name>
+        <url-pattern>/adminProductServlet</url-pattern>
+    </servlet-mapping>
+
 </web-app>
