@@ -114,7 +114,7 @@ font {
 				<font>会员登录</font>USER LOGIN
 
 				<div>&nbsp;</div>
-<form class="form-horizontal" action="/userServlet" method="post">
+<form class="form-horizontal" action="${pageContext.request.contextPath}/userServlet" method="post">
 
 
 	<input name="method" value="login" type="hidden">

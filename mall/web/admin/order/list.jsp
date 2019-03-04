@@ -15,7 +15,7 @@
 
                 var $tb=$("#div"+oid);
 
-                $.post("/adminOrderServlet",{
+                $.post("${pageContext.request.contextPath}/adminOrderServlet",{
                     "method":"findOrderByOidWithAjax",
 					"id":oid
 				},function (data,status) {

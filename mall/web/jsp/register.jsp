@@ -49,7 +49,7 @@
           if (strUsername ==""){
               return
           }
-          $.post("/userServlet",{
+          $.post("${pageContext.request.contextPath}/userServlet",{
               "method":"checkUserNameCanUse",
               "username":strUsername
           },function (data,status) {
@@ -101,7 +101,7 @@
 
         <div class="col-md-8" style="background:#fff;padding:40px 80px;margin:30px;border:7px solid #ccc;">
             <font>会员注册</font>USER REGISTER
-            <form class="form-horizontal" style="margin-top:5px;" action="/userServlet" method="post" onsubmit="return checkFormData()">
+            <form class="form-horizontal" style="margin-top:5px;" action="${pageContext.request.contextPath}/userServlet" method="post" onsubmit="return checkFormData()">
 
                 <input type="hidden" name="method" value="register">
                 <div class="form-group">
