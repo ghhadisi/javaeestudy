@@ -5,6 +5,7 @@ import com.hss.mall.domain.PageModel;
 import com.hss.mall.domain.User;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public interface IOrderService {
     void saveOrder(Order order)throws SQLException;
@@ -14,4 +15,9 @@ public interface IOrderService {
     Order findOrderByOid(String oid)throws Exception;
 
     void updateOrder(Order order)throws Exception;
+
+
+    List<Order> findAllOrders()throws Exception;
+
+    List<Order> findAllOrders(String st)throws Exception;
 }

@@ -115,4 +115,15 @@
         <url-pattern>/adminProductServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AdminOrderServlet</servlet-name>
+        <servlet-class>com.hss.mall.servlet.AdminOrderServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminOrderServlet</servlet-name>
+        <url-pattern>/adminOrderServlet</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

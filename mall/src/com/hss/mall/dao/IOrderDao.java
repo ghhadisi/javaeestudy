@@ -20,4 +20,7 @@ public interface IOrderDao {
 
     void updateOrder(Order order)throws Exception;
 
+    List<Order> findAllOrders()throws Exception;
+
+    List<Order> findAllOrders(String st)throws Exception;
 }
