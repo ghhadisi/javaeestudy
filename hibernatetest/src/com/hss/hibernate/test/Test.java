@@ -129,8 +129,8 @@ public class Test {
         Session session = HibernateUtil.openSession();
         Transaction tx = session.beginTransaction();
 
-        // 接收HQL：Hibernate Query Language 面向对象的查询语言
-     /*   Query query = session.createQuery("from users");
+        // 接收HQL：Hibernate QueryTest Language 面向对象的查询语言
+     /*   QueryTest query = session.createQuery("from users");
         List<User> list = query.list();
 
         for (User customer : list) {

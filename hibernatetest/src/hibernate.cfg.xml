@@ -30,6 +30,8 @@
                 update 如果数据库有表,使用原来表,如果没有则创建表,可以更新表结构
                 validate 只会使用原有表,对映射关系进行效验
         -->
+
+
         <!-- 配置C3P0连接池 -->
         <property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
         <!--在连接池中可用的数据库连接的最少数目 -->
@@ -41,7 +43,31 @@
         <!--每3000秒检查所有连接池中的空闲连接 以秒为单位-->
         <property name="c3p0.idle_test_period">3000</property>
 
+
+
+        <!--事务的隔离级别-->
+        <!--
+        指定hibernate操作数据库时的隔离级别
+			#hibernate.connection.isolation 1|2|4|8
+			0001	1	读未提交
+			0010	2	读已提交
+			0100	4	可重复读
+			1000	8	串行化
+        -->
+        <property name="hibernate.connection.isolation">4</property>
+
+        <!-- 指定session与当前线程绑定 -->
+        <!--
+            thread  session对象的生命周期与本地线程绑定
+            jta   session对象的生命周期与jta事务绑定
+            managed    hibernate 委托程序来管理session对象生命周期
+        -->
+        <property name="hibernate.current_session_context_class">thread</property>
+
         <!--hibernate 加载映射-->
         <mapping  resource="com/hss/hibernate/test/bean/User.hbm.xml"></mapping>
+
+
+
     </session-factory>
 </hibernate-configuration>
