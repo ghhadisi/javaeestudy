@@ -22,7 +22,7 @@
         <!-- 格式化SQL -->
         <property name="hibernate.format_sql">true</property>
         <!-- 自动创建表 -->
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         <!--
         auto    none 不用hibernate 自动生成表
                 create 每次都会穿建新表(测试)
@@ -72,6 +72,9 @@
         <mapping  resource="com/hss/hibernate/test/bean/LinkMan.hbm.xml"></mapping>
 
 
+        <mapping  resource="com/hss/hibernate/test/bean/SysUser.hbm.xml"></mapping>
+
+        <mapping  resource="com/hss/hibernate/test/bean/Role.hbm.xml"></mapping>
 
     </session-factory>
 </hibernate-configuration>
