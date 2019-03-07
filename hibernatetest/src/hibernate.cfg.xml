@@ -7,7 +7,7 @@
         <!-- 连接数据库的基本参数 -->
 
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost/db1?useUnicode=true&amp;characterEncoding=UTF8</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost/db3?useUnicode=true&amp;characterEncoding=UTF8</property>
         <property name="hibernate.connection.password">123456</property>
         <property name="hibernate.connection.username">root</property>
         <!-- 配置Hibernate的方言 -->
@@ -22,7 +22,7 @@
         <!-- 格式化SQL -->
         <property name="hibernate.format_sql">true</property>
         <!-- 自动创建表 -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
         <!--
         auto    none 不用hibernate 自动生成表
                 create 每次都会穿建新表(测试)
@@ -66,6 +66,10 @@
 
         <!--hibernate 加载映射-->
         <mapping  resource="com/hss/hibernate/test/bean/User.hbm.xml"></mapping>
+
+        <mapping  resource="com/hss/hibernate/test/bean/Customer.hbm.xml"></mapping>
+
+        <mapping  resource="com/hss/hibernate/test/bean/LinkMan.hbm.xml"></mapping>
 
 
 
