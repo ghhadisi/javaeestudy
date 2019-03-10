@@ -68,5 +68,26 @@ public class Customer {
 	public void setLinkMans(Set<LinkMan> linkMans) {
 		this.linkMans = linkMans;
 	}
-	
+
+
+	@Override
+	public String toString() {
+		return "Customer{" +
+				"cust_id=" + cust_id +
+				", cust_name='" + cust_name + '\'' +
+				", cust_source='" + cust_source + '\'' +
+				", cust_industry='" + cust_industry + '\'' +
+				", cust_level='" + cust_level + '\'' +
+				", cust_phone='" + cust_phone + '\'' +
+				", cust_mobile='" + cust_mobile + '\'' +
+				'}';
+	}
+
+	public Customer() {
+	}
+
+	public Customer(String cust_name, String cust_source) {
+		this.cust_name = cust_name;
+		this.cust_source = cust_source;
+	}
 }

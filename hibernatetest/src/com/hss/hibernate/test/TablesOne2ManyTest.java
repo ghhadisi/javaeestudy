@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 
 public class TablesOne2ManyTest {
     public static void main(String[] args) {
-        demo10();
+        demo1();
     }
 
 

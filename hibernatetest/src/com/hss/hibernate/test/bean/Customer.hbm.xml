@@ -22,7 +22,7 @@
 				* cascade：级联
 				* inverse：放弃外键维护权。
         -->
-        <set name="linkMans" cascade="save-update,delete" inverse="true">
+        <set name="linkMans" cascade="save-update,delete" inverse="false" >
             <key column="lkm_cust_id" />
             <one-to-many class="com.hss.hibernate.test.bean.LinkMan" />
         </set>
