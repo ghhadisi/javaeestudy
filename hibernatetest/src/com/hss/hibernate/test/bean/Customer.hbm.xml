@@ -3,7 +3,8 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.hss.hibernate.test.bean.Customer" table="cst_customer">
+    <!--batch-size="5 "-->
+    <class name="com.hss.hibernate.test.bean.Customer" table="cst_customer"  >
         <id name="cust_id" column="cust_id">
             <generator class="native"></generator>
         </id>
@@ -21,8 +22,15 @@
 				* name	：多的一方的对象集合的属性名称。
 				* cascade：级联
 				* inverse：放弃外键维护权。
+
+		fetch="subselect" lazy="false"
+		batch-size="5"
+		  fetch="subselect" lazy="false"
         -->
-        <set name="linkMans" cascade="save-update,delete" inverse="false" >
+        <set name="linkMans" cascade="save-update,delete" inverse="false"
+
+
+        >
             <key column="lkm_cust_id" />
             <one-to-many class="com.hss.hibernate.test.bean.LinkMan" />
         </set>

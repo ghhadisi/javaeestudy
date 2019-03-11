@@ -5,29 +5,30 @@ import com.hss.hibernate.test.bean.LinkMan;
 import com.hss.hibernate.test.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.junit.Test;
 
 public class TablesOne2ManyTest {
     public static void main(String[] args) {
-        demo1();
     }
 
 
-    public static void demo1(){
+    @Test
+    public  void demo1(){
         Session session = HibernateUtil.getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
         Customer customer1 = new Customer();
-        customer1.setCust_name("王东");
+        customer1.setCust_name("王东3");
         Customer customer2 = new Customer();
-        customer2.setCust_name("赵洪");
+        customer2.setCust_name("赵洪3");
 
         // 创建三个联系人
         LinkMan linkMan1 = new LinkMan();
-        linkMan1.setLkm_name("凤姐");
+        linkMan1.setLkm_name("凤姐3");
         LinkMan linkMan2 = new LinkMan();
-        linkMan2.setLkm_name("如花");
+        linkMan2.setLkm_name("如花3");
         LinkMan linkMan3 = new LinkMan();
-        linkMan3.setLkm_name("旺财");
+        linkMan3.setLkm_name("旺财3");
 
         // 设置关系:
         linkMan1.setCustomer(customer1);
