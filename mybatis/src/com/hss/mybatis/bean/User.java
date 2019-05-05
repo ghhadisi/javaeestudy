@@ -1,4 +1,4 @@
-package com.hss.myhbatis.bean;
+package com.hss.mybatis.bean;
 
 import java.io.Serializable;
 import java.util.Date;

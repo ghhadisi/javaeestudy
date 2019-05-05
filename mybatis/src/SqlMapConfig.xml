@@ -2,20 +2,54 @@
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--
+SqlMapConfig.xml中配置的内容和顺序如下：
+
+properties（属性）
+settings（全局配置参数）
+typeAliases（类型别名）
+typeHandlers（类型处理器）
+objectFactory（对象工厂）
+plugins（插件）
+environments（环境集合属性对象）
+environment（环境子属性对象）
+transactionManager（事务管理）
+dataSource（数据源）
+mappers（映射器）
+
+-->
 <configuration>
+    <!-- 是用resource属性加载外部配置文件 -->
+    <properties resource="db.properties">
+        <!-- 在properties内部用property定义属性 -->
+        <!-- 如果外部配置文件有该属性，则内部定义属性被外部属性覆盖 -->
+      <!--  <property name="jdbc.username" value="root123" />
+        <property name="jdbc.password" value="root123" />-->
+    </properties>
     <!-- 和spring整合后 environments配置将废除 -->
     <environments default="development">
         <environment id="development">
             <!-- 使用jdbc事务管理 -->
             <transactionManager type="JDBC" />
             <!-- 数据库连接池 -->
-            <dataSource type="POOLED">
+            <!--<dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver" />
                 <property name="url"
                           value="jdbc:mysql://localhost:3306/db3?characterEncoding=utf-8" />
                 <property name="username" value="root" />
                 <property name="password" value="123456" />
+            </dataSource>-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}" />
+                <property name="url"
+                          value="${jdbc.url}" />
+                <property name="username" value="${jdbc.username}" />
+                <property name="password" value="${jdbc.password}" />
             </dataSource>
         </environment>
     </environments>
+    <mappers>
+        <mapper resource="com/hss/mybatis/bean/User.xml" />
+        <mapper resource="config/User.xml" />
+    </mappers>
 </configuration>

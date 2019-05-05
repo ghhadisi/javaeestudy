@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace：命名空间，用于隔离sql，还有一个很重要的作用，后面会讲 -->
+<mapper namespace="test">
+    <!-- id:statement的id 或者叫做sql的id-->
+    <!-- parameterType:声明输入参数的类型 -->
+    <!-- resultType:声明输出结果的类型，应该填写pojo的全路径 -->
+    <!-- #{}：输入参数的占位符，相当于jdbc的？ -->
+    <select id="queryUserById" parameterType="int" resultType="com.hss.mybatis.bean.User">
+        select * from user where id = #{id}
+    </select>
+
+    <!-- 如果返回多个结果，mybatis会自动把返回的结果放在list容器中 -->
+    <!-- resultType的配置和返回一个结果的配置一样 -->
+    <select id="queryUserByName" parameterType="string" resultType="com.hss.mybatis.bean.User">
+        select * from user where username like #{username}
+    </select>
+
+    <select id="queryUserByName2" parameterType="string" resultType="com.hss.mybatis.bean.User">
+        select * from user where username like '%${value}%'
+    </select>
+
+    <insert id="saveUser" parameterType="com.hss.mybatis.bean.User">
+        insert into user (username,birthday,sex,address) values (#{username},#{birthday},#{sex},#{address})
+    </insert>
+
+
+    <!---->
+    <insert id="saveUser2" parameterType="com.hss.mybatis.bean.User">
+        <!-- selectKey 标签实现主键返回 -->
+        <!-- keyColumn:主键对应的表中的哪一列 -->
+        <!-- keyProperty：主键对应的pojo中的哪一个属性 -->
+        <!-- order：设置在执行insert语句前执行查询id的sql，孩纸在执行insert语句之后执行查询id的sql -->
+        <!-- resultType：设置返回的id的类型 -->
+        <selectKey keyColumn="id"  keyProperty="id"  order="AFTER" resultType="int">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into user (username,birthday,sex,address) values (#{username},#{birthday},#{sex},#{address})
+    </insert>
+
+
+<!--5.7.5.Mysql使用 uuid实现主键-->
+    <insert id="saveUser3" parameterType="com.hss.mybatis.bean.User">
+        <!-- selectKey 标签实现主键返回 -->
+        <!-- keyColumn:主键对应的表中的哪一列 -->
+        <!-- keyProperty：主键对应的pojo中的哪一个属性 -->
+        <!-- order：设置在执行insert语句前执行查询id的sql，孩纸在执行insert语句之后执行查询id的sql -->
+        <!-- resultType：设置返回的id的类型 -->
+        <selectKey keyColumn="id"  keyProperty="id"  order="BEFORE" resultType="string">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into user (username,birthday,sex,address) values (#{username},#{birthday},#{sex},#{address})
+    </insert>
+
+
+    <!--修改用户名-->
+    <update id="updateUserById" parameterType="com.hss.mybatis.bean.User">
+        update user set username = #{username} where id = #{id}
+
+    </update>
+
+<!--5.9.删除用户-->
+    <delete id="deleteUserById" parameterType="int">
+        delete from user  where id = #{id}
+    </delete>
+    <!--
+    5.6.1.#{}和${}
+#{}表示一个占位符号，通过#{}可以实现preparedStatement向占位符中设置值，
+自动进行java类型和jdbc类型转换。#{}可以有效防止sql注入。 #{}可以接收简单类型值或pojo属性值。
+ 如果parameterType传输单个简单类型值，#{}括号中可以是value或其它名称。
+
+${}表示拼接sql串，通过${}可以将parameterType 传入的内容拼接在sql中且不进行jdbc类型转换，
+ ${}可以接收简单类型值或pojo属性值，如果parameterType传输单个简单类型值，${}括号中只能是value。
+
+    5.6.2.parameterType和resultType
+parameterType：指定输入参数类型，mybatis通过ognl从输入对象中获取参数值拼接在sql中。
+resultType：指定输出结果类型，mybatis将sql查询结果的一行记录数据映射为resultType指定类型的对象。如果有多条数据，则分别进行映射，并把对象放到容器List中
+
+5.6.3.selectOne和selectList
+selectOne查询一条记录，如果使用selectOne查询多条记录则抛出异常：
+org.apache.ibatis.exceptions.TooManyResultsException: Expected one result (or null) to be returned by selectOne(), but found: 3
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:70)
+selectList可以查询一条或多条记录。
+    -->
+
+
+</mapper>
