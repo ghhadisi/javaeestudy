@@ -26,6 +26,16 @@ mappers（映射器）
       <!--  <property name="jdbc.username" value="root123" />
         <property name="jdbc.password" value="root123" />-->
     </properties>
+
+
+   <!-- <typeAliases>
+        &lt;!&ndash; 单个别名定义 &ndash;&gt;
+        <typeAlias alias="user" type="cn.itcast.mybatis.pojo.User" />
+        &lt;!&ndash; 批量别名定义，扫描整个包下的类，别名为类名（大小写不敏感） &ndash;&gt;
+        <package name="cn.itcast.mybatis.pojo" />
+        <package name="其它包" />
+    </typeAliases>-->
+
     <!-- 和spring整合后 environments配置将废除 -->
     <environments default="development">
         <environment id="development">
@@ -51,5 +61,15 @@ mappers（映射器）
     <mappers>
         <mapper resource="com/hss/mybatis/bean/User.xml" />
         <mapper resource="config/User.xml" />
+        <mapper resource="config/OrderMapper.xml" />
+<!--
+        <mapper class="cn.itcast.mybatis.mapper.UserMapper"/>
+        此种方法要求mapper接口名称和mapper映射文件名称相同，且放在同一个目录中。
+        -->
+
+        <!--
+        <package name="cn.itcast.mybatis.mapper"/>
+此种方法要求mapper接口名称和mapper映射文件名称相同，且放在同一个目录中
+        -->
     </mappers>
 </configuration>

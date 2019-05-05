@@ -86,4 +86,13 @@ selectList可以查询一条或多条记录。
     -->
 
 
+    <select id="queryUserByQueryVo" parameterType="com.hss.mybatis.bean.QueryVo" resultType="com.hss.mybatis.bean.User">
+      select * from user  where username like '%${user.username}%'
+    </select>
+
+
+    <select id="queryUserCount"  resultType="int">
+      select count(*) from user
+    </select>
+
 </mapper>

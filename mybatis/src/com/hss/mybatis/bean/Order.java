@@ -3,7 +3,7 @@ package com.hss.mybatis.bean;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Orders  implements Serializable{
+public class Order implements Serializable{
     private static final long serialVersionUID = 3783157801768035041L;
     /**
 	 * 
@@ -59,6 +59,14 @@ public class Orders  implements Serializable{
         this.note = note == null ? null : note.trim();
     }
 
-    
-    
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", number='" + number + '\'' +
+                ", createtime=" + createtime +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }
