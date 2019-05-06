@@ -1,7 +1,9 @@
 package com.hss.mybatis.mapper;
 
+import com.hss.mybatis.bean.OrderUser;
 import com.hss.mybatis.bean.QueryVo;
 import com.hss.mybatis.bean.User;
+import com.hss.mybatis.bean.User2;
 
 import java.util.List;
 
@@ -44,4 +46,12 @@ public interface UserMapper {
     List<User> queryUserByQueryVo(QueryVo queryVo);
 
     int queryUserCount();
+
+    List<User>   queryUserByWhere(User user);
+
+    List<User> queryUserByIds(QueryVo queryVo);
+
+    List<OrderUser> queryOrderUser();
+
+    List<User2> queryUserOrder2();
 }

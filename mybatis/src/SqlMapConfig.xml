@@ -36,6 +36,16 @@ mappers（映射器）
         <package name="其它包" />
     </typeAliases>-->
 
+    <typeAliases >
+        <typeAlias alias="user" type="com.hss.mybatis.bean.User" />
+        <typeAlias alias="order" type="com.hss.mybatis.bean.Order" />
+        <typeAlias alias="queryVo" type="com.hss.mybatis.bean.QueryVo"/>
+
+        <typeAlias alias="orderUser" type="com.hss.mybatis.bean.OrderUser" />
+        <typeAlias alias="order2" type="com.hss.mybatis.bean.Order2" />
+        <typeAlias alias="user2" type="com.hss.mybatis.bean.User2" />
+
+    </typeAliases>
     <!-- 和spring整合后 environments配置将废除 -->
     <environments default="development">
         <environment id="development">

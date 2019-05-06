@@ -1,6 +1,7 @@
 package com.hss.mybatis;
 
 import com.hss.mybatis.bean.Order;
+import com.hss.mybatis.bean.Order2;
 import com.hss.mybatis.bean.QueryVo;
 import com.hss.mybatis.bean.User;
 import com.hss.mybatis.mapper.OrderMapper;
@@ -50,6 +51,22 @@ public class Test3 {
         sqlSession.close();
     }
 
+    //一对一
+    @Test
+    public void fun2(){
+        // 4. 创建SqlSession对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        // 5. 执行SqlSession对象执行查询，获取结果User
+        // 第一个参数是User.xml的statement的id，第二个参数是执行sql需要的参数；
+        OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+        List<Order2> list = orderMapper.queryOrderUserResultMap();
+        // 6. 打印结果
+        for (Order2 item : list) {
+            System.out.println(item);
+        }
+        // 7. 释放资源
+        sqlSession.close();
+    }
 
 
 }

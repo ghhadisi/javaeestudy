@@ -4,6 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace：命名空间，用于隔离sql，还有一个很重要的作用，后面会讲 -->
 <mapper namespace="com.hss.mybatis.mapper.UserMapper">
+
+    <!-- 声明sql片段 -->
+    <sql id="userFields">
+        	id, username, birthday, sex, address
+    </sql>
+
+
     <!-- id:statement的id 或者叫做sql的id-->
     <!-- parameterType:声明输入参数的类型 -->
     <!-- resultType:声明输出结果的类型，应该填写pojo的全路径 -->
@@ -94,5 +101,92 @@ selectList可以查询一条或多条记录。
     <select id="queryUserCount"  resultType="int">
       select count(*) from user
     </select>
+    <!-- 根据条件查询用户 -->
+<!--    <select id="queryUserByWhere" parameterType="user" resultType="user">
+		SELECT id, username, birthday, sex, address FROM `user`
+	WHERE sex = #{sex} AND username LIKE
+	'%${username}%'
+	</select>-->
+    <!--3.1.5.使用if标签-->
+  <!--  <select id="queryUserByWhere" parameterType="user" resultType="user">
+		SELECT id, username, birthday, sex, address FROM `user`
+	WHERE 1=1
+	    <if test='sex != null and sex != ""'>
+            AND sex = #{sex}
+        </if>
 
+        <if test='username != null and username != ""'>
+            AND username LIKE '%${username}%'
+        </if>
+	</select>-->
+    <!--3.2.Where标签-->
+    <!--如果要使用别的Mapper.xml配置的sql片段，可以在refid前面加上对应的Mapper.xml的namespace-->
+    <select id="queryUserByWhere" parameterType="user" resultType="user">
+        SELECT <include refid="userFields" /> FROM `user`
+        <where>
+        <if test='sex != null and sex != ""'>
+            AND sex = #{sex}
+        </if>
+
+        <if test='username != null and username != ""'>
+            AND username LIKE '%${username}%'
+        </if>
+        </where>
+    </select>
+
+    <!-- 根据ids查询用户 -->
+    <!--foreach-->
+    <select id="queryUserByIds" parameterType="queryVo" resultType="user">
+    SELECT * FROM `user`
+      <where>
+          <!-- foreach标签，进行遍历 -->
+          <!-- collection：遍历的集合，这里是QueryVo的ids属性 -->
+          <!-- item：遍历的项目，可以随便写，，但是和后面的#{}里面要一致 -->
+          <!-- open：在前面添加的sql片段 -->
+          <!-- close：在结尾处添加的sql片段 -->
+          <!-- separator：指定遍历的元素之间使用的分隔符 -->
+          <foreach collection="ids" item="item" open="id IN (" close=")" separator=",">
+              #{item}
+          </foreach>
+      </where>
+    </select>
+
+    <select id="queryOrderUser" resultType="orderUser">
+        select o.id, o.user_id userId, o.number, o.createtime, o.note, u.username, u.address from orders o left join user u on  o.user_id = u.id
+    </select>
+
+
+
+<!--4.3.一对多查询-->
+    <resultMap type="user2" id="userOrderResultMap">
+        <id property="id" column="id" />
+        <result property="username" column="username" />
+        <result property="birthday" column="birthday" />
+        <result property="sex" column="sex" />
+        <result property="address" column="address" />
+
+        <!-- 配置一对多的关系 -->
+        <collection property="orders" javaType="list" ofType="order">
+            <!-- 配置主键，是关联Order的唯一标识 -->
+            <id property="id" column="oid" />
+            <result property="number" column="number" />
+            <result property="createtime" column="createtime" />
+            <result property="note" column="note" />
+        </collection>
+    </resultMap>
+    <!-- 一对多关联，查询订单同时查询该用户下的订单 -->
+    <select id="queryUserOrder2" resultMap="userOrderResultMap">
+    SELECT u.id,
+	u.username,
+	u.birthday,
+	u.sex,
+	u.address,
+	o.id oid,
+	o.number,
+	o.createtime,
+	o.note
+	FROM
+	`user` u
+	LEFT JOIN `orders` o ON u.id = o.user_id
+    </select>
 </mapper>
